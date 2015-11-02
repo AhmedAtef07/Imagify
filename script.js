@@ -77,7 +77,7 @@ function wrapText(ctx, text, x, y, maxWidth, fontHeight) {
 
     for (var i = 0, len = words.length; i < len; i++) {
       lineTest = line + words[i] + ' ';
-      if (words[i][0] == '\n' && ctx.measureText(lineTest).width > maxWidth) {
+      if (ctx.measureText(lineTest).width > maxWidth) {
         currentY = lines.length * fontHeight + fontHeight;
         lines.push({ text: line, height: currentY });
         line = words[i] + ' ';
