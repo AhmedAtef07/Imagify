@@ -62,7 +62,6 @@ function draw() {
 
   var text = $("#text").val();
   var textHeight = getTextHeight(app.font).height;
-  console.log(textHeight);
   wrapText(ctx, text, 50, 50, width - 50 - 50, textHeight);
 }
 
@@ -162,7 +161,7 @@ function initApp() {
       width: 0,
       height: 0,
       font: {
-        family: "Source Sans Pro",
+        family: "Source Sans Pro, Amiri",
         size: 70,
         wight: 300,
         toString: function() {
@@ -173,7 +172,6 @@ function initApp() {
       fontcolor: "#34495e",
     }
   });
-  console.log(app);
 }
 
 
