@@ -4,11 +4,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Text Imagify</title>
+    <title>Imagify</title>
 
     <!-- Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/cosmo/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/2.3.0/css/bootstrap-colorpicker.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/2.3.0/css/bootstrap-colorpicker.css"> -->
     <!-- Custom CSS -->
     <link href="style.css" rel="stylesheet">
 
@@ -20,12 +20,12 @@
     <![endif]-->
   </head>
   <body onload="runOnce()">
-    <div class="container">
-
+    <div class="container" id="app">
       <!-- Header -->
       <div class="row">
-        <div class="col-xs-12">
-          <h1 class="text-center">Text Imagify</h1>
+        <div class="col-xs-12 text-center">
+          <h1 class="text-center">Imagify</h1>
+          <small>Write anything, format it, then download as an image.</small>
           <hr>
         </div>
       </div>
@@ -55,23 +55,50 @@
             <legend>Edit</legend>
           
             <div class="form-group">
-              <label>Background Color:</label>
+              <label>Background Color</label>
               <div id="bg-color-picker"></div>
             </div>
 
             <div class="form-group">
-              <label>Font Color:</label>
+              <label>Font Color</label>
               <div id="font-color-picker"></div>
             </div>
-            
-            <div class="form-group">
-              <button type="button" class="btn btn-primary" onclick="downloadCanvasAsImage()">Download Image</button>
-            </div>
-          </form>
           
+            <div class="row">
+              <div class="col-xs-2">
+                <div class="form-group" class="">
+                  <label class="col-xs-12">Font Size</label>
+                  <input type="number" v-model="font.size" class="form-control col-xs-12">
+                </div>
+              </div>
+              <!-- <div class="col-xs-2">
+                <div class="form-group" class="">
+                  <label class="col-xs-12">Width</label>
+                  <input type="number" v-model="width" class="form-control col-xs-12">
+                </div>
+              </div>
+              <div class="col-xs-2">
+                <div class="form-group" class="">
+                  <label class="col-xs-12">Height</label>
+                  <input type="number" v-model="height" class="form-control col-xs-12">
+                </div>
+              </div> -->
+            </div>
+           
+            <div class="row top-15">
+              <div class="col-xs-6">
+                <div class="form-group">
+                  <button type="button" class="btn btn-primary" onclick="downloadCanvasAsImage()">Download Image</button>
+                </div>
+              </div>
+            </div>
+            
+          </form>
+
         </div>
       </div>
       <!-- ./Image Options -->
+      <div class="pull-right top-30">Created By Ahmed Atef</div>
     </div>
 
     <!-- jQuery -->
@@ -79,7 +106,9 @@
     <!-- Bootstrap JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <!-- Bootstrap Colorpicker JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/2.3.0/js/bootstrap-colorpicker.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/2.3.0/js/bootstrap-colorpicker.js"></script> -->
+    <!-- VueJS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.4/vue.js"></script>
     <!-- Custom Scripts -->
     <script src="script.js"></script>
   </body>

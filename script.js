@@ -3,71 +3,21 @@
 
 var canvas = {};
 var ctx = {};
-
-var options = {
-  bgcolor: "#FBFBFB",
-  fontcolor: "#34495e",
-  font: {
-      family: "Source Sans Pro",
-      size: 70,
-      wight: 300,
-
-      string: function() {
-        return this.wight + " " + this.size + "px " + this.family;
-      }
-    }
-};
-
-var colors = [
-  { value: "#1abc9c", name: "Turquoise" },
-  { value: "#16a085", name: "Greensea" },
-  { value: "#2ecc71", name: "Emerland" },
-  { value: "#27ae60", name: "Nephritis" },
-  { value: "#3498db", name: "Peterriver" },
-  { value: "#2980b9", name: "Belizehole" },
-  { value: "#9b59b6", name: "Amethyst" },
-  { value: "#8e44ad", name: "Wisteria" },
-  { value: "#34495e", name: "Wetasphalt" },
-  { value: "#2c3e50", name: "Midnightblue" },
-  { value: "#f1c40f", name: "Sunflower" },
-  { value: "#f39c12", name: "Orange" },
-  { value: "#e67e22", name: "Carrot" },
-  { value: "#d35400", name: "Pumpkin" },
-  { value: "#e74c3c", name: "Alizarin" },
-  { value: "#c0392b", name: "Pomegranate" },
-  { value: "#FFFFFF", name: "White" },
-  { value: "#FBFBFB", name: "Lightgray" },
-  { value: "#ecf0f1", name: "Clouds" },
-  { value: "#bdc3c7", name: "Silver" },
-  { value: "#95a5a6", name: "Concrete" },
-  { value: "#7f8c8d", name: "Asbestos," },
-  { value: "#000000", name: "Black," },
-];
+var app = {};
 
 function runOnce() {
-  $('#text').bind("propertychange change click keyup input paste", function(event) {
-    draw();
-  });  
-  $('.demo2').colorpicker();
+  initApp();
+
+  $('input').bind("propertychange change click keyup input paste", function(event) {draw();});
+  $('textarea').bind("propertychange change click keyup input paste", function(event) {draw();});
+
   canvas = document.getElementById("canvas");
   ctx = canvas.getContext("2d");
 
-  // setColorPicker($('#bg-color-picker'));
-  addCustomColors($('#bg-color-picker'), colors, "bgcolor");
-  addCustomColors($('#font-color-picker'), colors, "fontcolor");
+  addCustomColors($('#bg-color-picker'), COLORS, "bgcolor");
+  addCustomColors($('#font-color-picker'), COLORS, "fontcolor");
+  
   draw();
-}
-
-function setColorPicker(parent) {
-  parent.children().each(function(index, el) {
-    console.log(el);
-     $(el).css({
-      "background-color": el.value,
-      "color": el.value,
-      "border-width": 0,
-
-    });
-  });
 }
 
 function addCustomColors(parent, colors, target) {
@@ -90,7 +40,7 @@ function addCustomColors(parent, colors, target) {
 
 function colorButtonClicked(event) {
   var srcElement = event.target || event.srcElement;
-  options[$(srcElement).attr("target")] = srcElement.value;
+  app[$(srcElement).attr("target")] = srcElement.value;
 
   draw();
 }
@@ -100,16 +50,18 @@ function draw() {
   var width = canvas.width;
   var height = canvas.height;
 
-  ctx.fillStyle = options.bgcolor;
+  ctx.fillStyle = app.bgcolor;
   ctx.fillRect(0, 0, width, height);
 
   ctx.textBaseline = 'bottom';
-  ctx.fillStyle = options.fontcolor;
+  ctx.fillStyle = app.fontcolor;
   
-  ctx.font = options.font.string();
+  app.font.size = parseInt(app.font.size);
+
+  ctx.font = app.font.toString();
 
   var text = $("#text").val();
-  var textHeight = getTextHeight(options.font).height;
+  var textHeight = getTextHeight(app.font).height;
   console.log(textHeight);
   wrapText(ctx, text, 50, 50, width - 50 - 50, textHeight);
 
@@ -155,7 +107,7 @@ function wrapText(ctx, text, x, y, maxWidth, fontHeight) {
 
 var getTextHeight = function(font) {
 
-  var text = $('<span>Hg</span>').css({ font: font.string() });
+  var text = $('<span>Hg</span>').css({ font: font.toString() });
   var block = $('<div style="display: inline-block; width: 1px; height: 0px;"></div>');
 
   var div = $('<div></div>');
@@ -202,3 +154,53 @@ function downloadCanvasAsImage() {
 }
 
 
+function initApp() {
+  app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello Vue.js!',
+      width: 0,
+      height: 0,
+      font: {
+        family: "Source Sans Pro",
+        size: 70,
+        wight: 300,
+        toString: function() {
+          return this.wight + " " + this.size + "px " + this.family;
+        }
+      },
+      bgcolor: "#FBFBFB",
+      fontcolor: "#34495e",
+    }
+  });
+  console.log(app);
+}
+
+
+// Constants
+
+var COLORS = [
+  { value: "#1abc9c", name: "Turquoise" },
+  { value: "#16a085", name: "Greensea" },
+  { value: "#2ecc71", name: "Emerland" },
+  { value: "#27ae60", name: "Nephritis" },
+  { value: "#3498db", name: "Peterriver" },
+  { value: "#2980b9", name: "Belizehole" },
+  { value: "#9b59b6", name: "Amethyst" },
+  { value: "#8e44ad", name: "Wisteria" },
+  { value: "#34495e", name: "Wetasphalt" },
+  { value: "#2c3e50", name: "Midnightblue" },
+  { value: "#f1c40f", name: "Sunflower" },
+  { value: "#f39c12", name: "Orange" },
+  { value: "#e67e22", name: "Carrot" },
+  { value: "#d35400", name: "Pumpkin" },
+  { value: "#e74c3c", name: "Alizarin" },
+  { value: "#c0392b", name: "Pomegranate" },
+  { value: "#FFFFFF", name: "White" },
+  { value: "#FBFBFB", name: "Lightgray" },
+  { value: "#ecf0f1", name: "Clouds" },
+  { value: "#bdc3c7", name: "Silver" },
+  { value: "#95a5a6", name: "Concrete" },
+  { value: "#7f8c8d", name: "Asbestos," },
+  { value: "#000000", name: "Black," },
+];
