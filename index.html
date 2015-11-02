@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Text Imagify</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/cosmo/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/2.3.0/css/bootstrap-colorpicker.css">
+    <!-- Custom CSS -->
+    <link href="style.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="runOnce()">
+    <div class="container">
+
+      <!-- Header -->
+      <div class="row">
+        <div class="col-xs-12">
+          <h1 class="text-center">Text Imagify</h1>
+          <hr>
+        </div>
+      </div>
+      <!-- ./Header -->
+
+      <!-- Text Entry -->
+      <div class="row">
+        <div class="col-xs-12">
+          <textarea type="textarea" name="" id="text" class="form-control" required="required" placeholder="Start typing..." rows="1">The greatest quote ever!</textarea>
+        </div>
+      </div>
+      <!-- ./Text Entry -->
+
+      <!-- Image Canvas -->
+      <div class="row">
+        <div class="col-xs-12 text-center top-20">
+          <canvas id="canvas" width="600px" height="400px"></canvas>
+            
+        </div>
+      </div>
+      <!-- ./Image Canvas -->
+
+      <!-- Image Options -->
+      <div class="row top-20">
+        <div class="col-xs-12">
+          <form method="" class="" onsubmit="return false;">
+            <legend>Edit</legend>
+          
+            <div class="form-group">
+              <label>Background Color:</label>
+              <div id="bg-color-picker"></div>
+            </div>
+
+            <div class="form-group">
+              <label>Font Color:</label>
+              <div id="font-color-picker"></div>
+            </div>
+            
+            <div class="form-group">
+              <button type="button" class="btn btn-primary" onclick="downloadCanvasAsImage()">Download Image</button>
+            </div>
+          </form>
+          
+        </div>
+      </div>
+      <!-- ./Image Options -->
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <!-- Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <!-- Bootstrap Colorpicker JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/2.3.0/js/bootstrap-colorpicker.js"></script>
+    <!-- Custom Scripts -->
+    <script src="script.js"></script>
+  </body>
+</html>   
