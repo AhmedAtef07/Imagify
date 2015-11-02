@@ -16,7 +16,7 @@ function runOnce() {
 
   addCustomColors($('#bg-color-picker'), COLORS, "bgcolor");
   addCustomColors($('#font-color-picker'), COLORS, "fontcolor");
-  
+
   draw();
 }
 
@@ -64,7 +64,6 @@ function draw() {
   var textHeight = getTextHeight(app.font).height;
   console.log(textHeight);
   wrapText(ctx, text, 50, 50, width - 50 - 50, textHeight);
-
 }
 
 
@@ -78,12 +77,8 @@ function wrapText(ctx, text, x, y, maxWidth, fontHeight) {
   for (var i = 0, len = words.length; i < len; i++) {
     lineTest = line + words[i] + ' ';
     
-    // Check total width of line or last word
     if (ctx.measureText(lineTest).width > maxWidth) {
-      // Calculate the new height
       currentY = lines.length * fontHeight + fontHeight;
-
-      // Record and reset the current line
       lines.push({ text: line, height: currentY });
       line = words[i] + ' ';
     } else {
@@ -91,14 +86,11 @@ function wrapText(ctx, text, x, y, maxWidth, fontHeight) {
     }
   }
 
-  // Catch last line in-case something is left over
   if (line.length > 0) {
     currentY = lines.length * fontHeight + fontHeight;
     lines.push({ text: line.trim(), height: currentY });
   }
 
-  // Visually output text
-  // ctx.clearRect(0, 0, 500, 500);
   for (var i = 0, len = lines.length; i < len; i++) {
     ctx.fillText(lines[i].text, x, lines[i].height + y);
   }
@@ -134,6 +126,14 @@ var getTextHeight = function(font) {
   return result;
 };
 
+function addFotor(thinkness, color) {
+  ctx.beginPath();
+  ctx.moveTo(0, height);
+  ctx.lineTo(width, height);
+  ctx.lineWidth = thinkness;
+  ctx.strokeStyle = color;
+  ctx.stroke();
+}
 
 function convertCanvasToImage() {
   var image = new Image();
