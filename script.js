@@ -60,36 +60,38 @@ function draw() {
 
   ctx.font = app.font.toString();
 
-  var text = $("#text").val();
+  var text = $("#text").val().split(/\n\r?/);
   var textHeight = getTextHeight(app.font).height;
   wrapText(ctx, text, 50, 50, width - 50 - 50, textHeight);
 }
 
 
 function wrapText(ctx, text, x, y, maxWidth, fontHeight) {
-  var lines = [],
-      line = '',
-      lineTest = '',
-      words = text.split(' '),
-      currentY = 0;
+  var currentY = 0;
+  var lines = [];
+        
+  for(var ti in text) {
+    var words = text[ti].split(' ');
+    var line = '';
+    var lineTest = '';
 
-  for (var i = 0, len = words.length; i < len; i++) {
-    lineTest = line + words[i] + ' ';
-    
-    if (ctx.measureText(lineTest).width > maxWidth) {
-      currentY = lines.length * fontHeight + fontHeight;
-      lines.push({ text: line, height: currentY });
-      line = words[i] + ' ';
-    } else {
-      line = lineTest;
+    for (var i = 0, len = words.length; i < len; i++) {
+      lineTest = line + words[i] + ' ';
+      if (words[i][0] == '\n' && ctx.measureText(lineTest).width > maxWidth) {
+        currentY = lines.length * fontHeight + fontHeight;
+        lines.push({ text: line, height: currentY });
+        line = words[i] + ' ';
+      } else {
+        line = lineTest;
+      }
     }
-  }
 
-  if (line.length > 0) {
-    currentY = lines.length * fontHeight + fontHeight;
-    lines.push({ text: line.trim(), height: currentY });
-  }
+    if (line.length > 0) {
+      currentY = lines.length * fontHeight + fontHeight;
+      lines.push({ text: line.trim(), height: currentY });
+    }
 
+  }
   for (var i = 0, len = lines.length; i < len; i++) {
     ctx.fillText(lines[i].text, x, lines[i].height + y);
   }
