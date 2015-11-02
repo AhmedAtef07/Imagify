@@ -54,6 +54,7 @@ function draw() {
   ctx.fillRect(0, 0, width, height);
 
   ctx.textBaseline = 'bottom';
+  ctx.textAlign = 'center';
   ctx.fillStyle = app.fontcolor;
   
   app.font.size = parseInt(app.font.size);
@@ -93,7 +94,7 @@ function wrapText(ctx, text, x, y, maxWidth, fontHeight) {
 
   }
   for (var i = 0, len = lines.length; i < len; i++) {
-    ctx.fillText(lines[i].text, x, lines[i].height + y);
+    ctx.fillText(lines[i].text, canvas.width / 2, lines[i].height + y);
   }
 }
 
